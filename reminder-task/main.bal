@@ -13,7 +13,17 @@ public function main() returns error? {
 
     http:Client clientEp = check new (chatApiUrl);
     http:Response|error jsonResponse = clientEp->/ping;
-    io:println("chat URL: " + jsonResponse);
+    if (jsonResponse is http:Response) {
+        var result = jsonResponse.getJsonPayload();
+        if (result is json) {
+            // value = value + result.toJsonString();
+            io:println("Ping: " + result.toJsonString());
+        } else {
+            // value = value + result.message();
+            io:println("Ping: " + result.message());
+        }
+    }
+    
     // Define the request
     http:Request request = new;
     request.method = http:POST;
