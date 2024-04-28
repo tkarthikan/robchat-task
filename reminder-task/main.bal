@@ -4,36 +4,37 @@ import ballerina/log;
 import ballerina/time;
 
 configurable string chatApiUrl = ?;
+import ballerina/http;
 
 public function main() returns error? {
+    // Define the request payload
+    json payload = { "from": 35, "to": 134, "messsgae": "Time to start using Rob chat"};
     io:println("chat URL: " + chatApiUrl);
-    http:Client chatApiEndpoint = check new (chatApiUrl);
+    // http:Client client = check new (chatApiUrl);
+    http:Client client = new;
 
-    // Sending messages asynchronously using a select clause
-    select {
-        // First message
-        http:Response resp1 = chatApiEndpoint->/messages/sendMsg({"from": "1", "to": "1", "message": "Time to start using Rob chat"});
-        // Handling response
-        case resp1 is http:Response => {
-            log:printInfo("Response for Message 1: ", resp1.getTextPayload());
-        }
-        // Error handling
-        case error err1 => {
-            log:printError("Error sending Message 1: ", err1);
-        }
-    }
-    
-    // Second message
-    select {
-        // Second message
-        http:Response resp2 = chatApiEndpoint->/messages/sendMsg({"from": "1", "to": "2", "message": "Time to start using Rob chat"});
-        // Handling response
-        case resp2 is http:Response => {
-            log:printInfo("Response for Message 2: ", resp2.getTextPayload());
-        }
-        // Error handling
-        case error err2 => {
-            log:printError("Error sending Message 2: ", err2);
-        }
-    }
+    // Define the request
+    http:Request request = new;
+    request.method = http:POST;
+    request.setPayload(payload);
+
+    // Send the request
+    http:Response response = check client->send(`${chatApiUrl}/messages/sendMsg`, request);
+
+    // Print the response
+    io:println("Response: ", response);
+
+    // Close the client
+    client.close();
+
+    // Return any error occurred
+    return response.statusCode != 200 ? error("Request failed with status code: " + response.statusCode) : ();
 }
+
+
+// public function main() returns error? {
+//     io:println("chat URL: " + chatApiUrl);
+//     http:Client chatApiEndpoint = check new (chatApiUrl);
+
+//    check  chatApiEndpoint->/messages/sendMsg({"from": "1", "to": "2", "message": "Time to start using Rob chat"});
+// }
