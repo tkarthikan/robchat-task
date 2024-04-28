@@ -19,7 +19,7 @@ public function main() returns error? {
     request.setPayload(payload);
 
     // Send the request
-    http:Response response = check client->send(`${chatApiUrl}/messages/sendMsg`, request);
+    http:Response response = check client->send(`${chatApiUrl}/messages/addmsg/`, request);
 
     // Print the response
     io:println("Response: ", response);
