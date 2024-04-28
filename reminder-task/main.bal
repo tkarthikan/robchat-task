@@ -1,16 +1,16 @@
 import ballerina/http;
 import ballerina/io;
-import ballerina/log;
-import ballerina/time;
+// import ballerina/log;
+// import ballerina/time;
 
 configurable string chatApiUrl = ?;
 
 
 public function main() returns error? {
-    // Define the request payload
+
     json payload = { "from": 35, "to": 134, "messsgae": "Time to start using Rob chat"};
     io:println("chat URL: " + chatApiUrl);
-    // http:Client client = check new (chatApiUrl);
+
     http:Client clientEp = check new (chatApiUrl);
 
     // Define the request
