@@ -12,7 +12,7 @@ public function main() returns error? {
     io:println("chat URL: " + chatApiUrl);
 
     http:Client clientEp = check new (chatApiUrl);
-
+    http:Response|error jsonResponse = clientEp->/ping;
     // Define the request
     http:Request request = new;
     request.method = http:POST;
