@@ -19,8 +19,9 @@ public function main() returns error? {
     request.setPayload(payload);
 
     // Send the request
-    check clientEp->post("/messages/addmsg/",
+    http:Response|error jsonResponse = check clientEp->post("/messages/addmsg/",
         {
+            from: "134",
             to: "134", 
             messsgae: "Time to start using Rob chat"
         }
