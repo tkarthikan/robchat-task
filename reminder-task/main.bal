@@ -4,14 +4,14 @@ import ballerina/log;
 import ballerina/time;
 
 configurable string chatApiUrl = ?;
-import ballerina/http;
+
 
 public function main() returns error? {
     // Define the request payload
     json payload = { "from": 35, "to": 134, "messsgae": "Time to start using Rob chat"};
     io:println("chat URL: " + chatApiUrl);
     // http:Client client = check new (chatApiUrl);
-    http:Client client = new;
+    http:Client client = new (chatApiUrl);
 
     // Define the request
     http:Request request = new;
@@ -19,7 +19,7 @@ public function main() returns error? {
     request.setPayload(payload);
 
     // Send the request
-    http:Response response = check client->send(`${chatApiUrl}/messages/addmsg/`, request);
+    http:Response response = check client->post(`/messages/addmsg/`, request);
 
     // Print the response
     io:println("Response: ", response);
