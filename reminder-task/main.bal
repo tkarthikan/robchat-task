@@ -8,7 +8,7 @@ configurable string chatApiUrl = ?;
 
 public function main() returns error? {
 
-    json payload = { "from": 35, "to": 134, "messsgae": "Time to start using Rob chat"};
+    json payload = { };
     io:println("chat URL: " + chatApiUrl);
 
     http:Client clientEp = check new (chatApiUrl);
@@ -19,7 +19,11 @@ public function main() returns error? {
     request.setPayload(payload);
 
     // Send the request
-    http:Response response = check clientEp->post("/messages/addmsg/", request);
+    http:Response response = check clientEp->/messages/addmsg.post({
+        from: 35, 
+        to: 134, 
+        messsgae: "Time to start using Rob chat",
+    });
 
     // Print the response
     io:println("Response: ", response);
