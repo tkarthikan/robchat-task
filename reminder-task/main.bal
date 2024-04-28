@@ -22,6 +22,9 @@ public function main() returns error? {
             // value = value + result.message();
             io:println("Ping: " + result.message());
         }
+    } else {
+        io:println("Ping: not http response");
+
     }
     
     // Define the request
@@ -31,6 +34,19 @@ public function main() returns error? {
 
     // Send the request
     http:Response|error jsonResponse2 = clientEp->post("/messages/addmsg", {"to": "134", "from": "35", "messages": "Time to start using Rob chat"});
+     if (jsonResponse2 is http:Response) {
+        var result = jsonResponse.getJsonPayload();
+        if (result is json) {
+            // value = value + result.toJsonString();
+            io:println("Add msg: " + result.toJsonString());
+        } else {
+            // value = value + result.message();
+            io:println("Add msg: " + result.message());
+        }
+    } else {
+        io:println("Add msg: not http response");
+
+    }
 
     // http:Response|error jsonResponse = clientEp->post("/messages/addmsg/", {from: "134", to: "134",  messsgae: "Time to start using Rob chat"});
 }
