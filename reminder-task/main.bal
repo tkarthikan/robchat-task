@@ -38,10 +38,10 @@ public function main() returns error? {
         var result2 = jsonResponse2.getJsonPayload();
         if (result2 is json) {
             // value = value + result.toJsonString();
-            io:println("Add msg: " + result.toJsonString());
+            io:println("Add msg: " + result2.toJsonString());
         } else {
             // value = value + result.message();
-            io:println("Add msg: " + result.message());
+            io:println("Add msg: " + result2.message());
         }
     } else {
         io:println("Add msg: not http response");
