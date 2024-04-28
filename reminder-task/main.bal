@@ -19,14 +19,11 @@ public function main() returns error? {
     request.setPayload(payload);
 
     // Send the request
-    http:Response response = check clientEp->/messages/addmsg.post({
-        from: 35, 
-        to: 134, 
+    check clientEp->/messages/addmsg.post({
+        from: "35", 
+        to: "134", 
         messsgae: "Time to start using Rob chat",
     });
-
-    // Print the response
-    io:println("Response: ", response);
 }
 
 
