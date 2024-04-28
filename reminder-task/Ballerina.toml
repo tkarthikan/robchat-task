@@ -1,5 +1,5 @@
 [package]
-org = "kt-09"
+org = "kt09"
 name = "reminder_task"
 version = "0.1.0"
 distribution = "2201.8.6"
