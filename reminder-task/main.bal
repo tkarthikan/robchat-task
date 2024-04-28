@@ -23,12 +23,6 @@ public function main() returns error? {
 
     // Print the response
     io:println("Response: ", response);
-
-    // Close the client
-    client.close();
-
-    // Return any error occurred
-    return response.statusCode != 200 ? error("Request failed with status code: " + response.statusCode) : ();
 }
 
 
