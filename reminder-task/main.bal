@@ -39,7 +39,7 @@ public function main() returns error? {
     // request.setPayload(payload);
 
     // Send the request
-    Ping addMsg = check clientEp->post("/messages/addmsg", {to: "134", fromm: "35", messages: "Time to start using Rob chat"});
+    Ping addMsg = check clientEp->post("/messages/addmsg", {to: "134", fromm: "35", message: "Time to start using Rob chat"});
     io:println("Add msg: " + addMsg.msg);
 
     
