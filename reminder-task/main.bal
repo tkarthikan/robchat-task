@@ -15,8 +15,9 @@ public function main() returns error? {
     io:println("chat URL: " + chatApiUrl);
 
     http:Client clientEp = check new (chatApiUrl);
-    Ping ping = check clientEp->/ping();
-    io:println("Ping: " + ping.msg);
+    
+    // Ping ping = check clientEp->/ping();
+    // io:println("Ping: " + ping.msg);
 
     // if (jsonResponse is http:Response) {
     //     var result = jsonResponse.getJsonPayload();
@@ -33,9 +34,9 @@ public function main() returns error? {
     // }
     
     // Define the request
-    http:Request request = new;
-    request.method = http:POST;
-    request.setPayload(payload);
+    // http:Request request = new;
+    // request.method = http:POST;
+    // request.setPayload(payload);
 
     // Send the request
     http:Response|error jsonResponse2 = clientEp->post("/messages/addmsg", {"to": "134", "from": "35", "messages": "Time to start using Rob chat"});
