@@ -15,7 +15,7 @@ public function main() returns error? {
     io:println("chat URL: " + chatApiUrl);
 
     http:Client clientEp = check new (chatApiUrl);
-    Ping ping = check clientEp->/ping;
+    Ping ping = check clientEp->/ping();
     io:println("Ping: " + ping.msg);
 
     // if (jsonResponse is http:Response) {
