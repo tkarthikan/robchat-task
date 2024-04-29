@@ -39,19 +39,22 @@ public function main() returns error? {
     // request.setPayload(payload);
 
     // Send the request
-    http:Response|error jsonResponse2 = clientEp->post("/messages/addmsg", {"to": "134", "from": "35", "messages": "Time to start using Rob chat"});
-     if (jsonResponse2 is http:Response) {
-        var result2 = jsonResponse2.getJsonPayload();
-        if (result2 is json) {
-            // value = value + result.toJsonString();
-            io:println("Add msg: " + result2.toJsonString());
-        } else {
-            // value = value + result.message();
-            io:println("Add msg: " + result2.message());
-        }
-    } else {
-        io:println("Add msg: not http response");
-    }
+    Ping addMsg = check clientEp->post("/messages/addmsg", {to: "134", fromm: "35", messages: "Time to start using Rob chat"});
+    io:println("Add msg: " + addMsg.msg);
+
+    
+    //  if (jsonResponse2 is http:Response) {
+    //     var result2 = jsonResponse2.getJsonPayload();
+    //     if (result2 is json) {
+    //         // value = value + result.toJsonString();
+    //         io:println("Add msg: " + result2.toJsonString());
+    //     } else {
+    //         // value = value + result.message();
+    //         io:println("Add msg: " + result2.message());
+    //     }
+    // } else {
+    //     io:println("Add msg: not http response");
+    // }
 
     // http:Response|error jsonResponse = clientEp->post("/messages/addmsg/", {from: "134", to: "134",  messsgae: "Time to start using Rob chat"});
 }
