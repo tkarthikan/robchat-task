@@ -39,7 +39,7 @@ public function main() returns error? {
     // request.setPayload(payload);
 
     // Send the request
-    http:Response|error jsonResponse2 = clientEp->post("messages/addmsg", {"to": "134", "from": "35", "messages": "Time to start using Rob chat"});
+    http:Response|error jsonResponse2 = clientEp->post("/messages/addmsg", {"to": "134", "from": "35", "messages": "Time to start using Rob chat"});
      if (jsonResponse2 is http:Response) {
         var result2 = jsonResponse2.getJsonPayload();
         if (result2 is json) {
